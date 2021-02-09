@@ -1,0 +1,24 @@
+    table,
+    tr,
+    td {
+        border-collapse: collapse;
+    }
+    
+    .cell {
+        width: 20px;
+        height: 20px;
+        border: 1px solid grey;
+        margin: none;
+    }
+    
+    .dead {
+        background-color: black;
+    }
+    
+    .life {
+        background-color: white;
+    }
+    
+    .hidden {
+        display: none;
+    }

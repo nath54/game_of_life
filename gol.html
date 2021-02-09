@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Game of life</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="header">
+        <div>
+            <input type="number" id="tx" placeholder="taille x" value=20 />
+            <span> x </span>
+            <input type="number" id="ty" placeholder="taille y" value=20 />
+            <input type="number" id="taille_case" placeholder="taille des cellules" value="20px" onchange="resize();" />
+            <button onclick="nouveau();">New</button>
+            <button onclick="execute();">One step</button>
+            <input type="number" id="timer" placeholder="Intervalle, en ms" value=200 />
+            <button id="bt_play" onclick="play();">Play</button>
+        </div>
+    </div>
+    <div id="div_table">
+        <table id="table">
+
+        </table>
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>
