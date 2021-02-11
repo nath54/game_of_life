@@ -1,0 +1,5 @@
+A faire :
+ - import RLE
+ - optimisation : matrice des sommes
+ - optimisation : on ne calcule que la partie où il y a des cellules vivantes
+ - extension automatique du tableau

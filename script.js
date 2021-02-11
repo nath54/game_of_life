@@ -130,16 +130,68 @@ function resize() {
     var val = parseInt(document.getElementById("taille_case").value);
     if (val < 1) {
         document.getElementById("taille_case").value = 1;
-        return
+        return;
     } else if (val > 50) {
         document.getElementById("taille_case").value = 50;
-        return
+        return;
     }
     var taille = "" + val + "px";
-    if (taille.sub)
+    if (taille.sub) {
         var all = document.getElementsByClassName('cell');
+    }
     for (var i = 0; i < all.length; i++) {
         all[i].style.width = taille;
         all[i].style.height = taille;
+    }
+}
+
+
+function import_rle() {
+    // on récupere la taille
+    var tx = document.getElementById("tx").value;
+    var ty = document.getElementById("ty").value;
+    // on récupère les infos RLE
+    var texte = document.getElementById("rle").value;
+    var debx = parseInt(document.getElementById("import_x").value);
+    var deby = parseInt(document.getElementById("import_y").value);
+    // on init les variables dont on aura besoin
+    var x = debx;
+    var y = deby;
+    var c = 0; // curseur
+    var chiffres = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    var nb = 1;
+    var state = 0; // 0 = on a rien en cours, 1 = on a un nombre en cours
+    // on traite tout le codage RLE
+    while (c < texte.length) {
+        var charactere = texte[c];
+        if (chiffres.includes(charactere)) { // c'est un chiffre
+            if (state == 0) {
+                state = 1;
+                nb = charactere; // ce sont des chaines de charactere normalement
+            } else {
+                nb += charactere; // ce sont des chaines de charactere normalement
+            }
+        } else { // c'est "o", "b" ou "$"
+            if (charactere == "$") { // on va s'occuper du "$" séparemment, ce sera plus simple
+                y += nb;
+                x = debx;
+            } else { // c'est soit "o" soit "b"
+                console.log(nb, charactere);
+                if (charactere == "o") {
+                    var func = set_life
+                } else {
+                    var func = set_dead
+                }
+                for (i = 0; i < nb; i++) {
+                    x++;
+                    if (x >= 0 && x <= tx && y >= 0 && y <= ty) {
+                        func("" + x + "-" + y);
+                    }
+                }
+            }
+            state = 0; // on a finit notre charactere
+            nb = 1;
+        }
+        c++;
     }
 }
